@@ -2,7 +2,7 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        Coffee java = new Coffee("Java");
+        Coffee java = new Coffee("Java", Type.GROUND);
         CoffeeMachine coffeeMachine = new CoffeeMachine();
 
         coffeeMachine.makeCoffee(0.8, 150);
