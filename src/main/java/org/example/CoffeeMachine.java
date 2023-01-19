@@ -39,17 +39,17 @@ public class CoffeeMachine {
         }
     }
 
-    public void makeCoffee(double strong, int sizeCup) {
+    public void makeCoffee(StrongLevel level, int sizeCup) {
         if (sizeCup > currentWater) {
             System.out.println("Долейте воды");
             return;
         }
-        if (norm * strong > currentCoffee) {
+        if (norm * level.getLevel() > currentCoffee) {
             System.out.println("Досыпьте кофе");
             return;
         }
-        currentCoffee -= norm * strong;
+        currentCoffee -= norm * level.getLevel();
         currentWater -= sizeCup;
-        System.out.printf("Готовлю %s объемом %d крепость %.1f \n", coffee.getCoffeeName(), sizeCup, strong);
+        System.out.printf("Готовлю %s объемом %d крепость %.2f \n", coffee.getCoffeeName(), sizeCup, level.getLevel());
     }
 }
