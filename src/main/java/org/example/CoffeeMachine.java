@@ -28,7 +28,14 @@ public class CoffeeMachine {
     }
 
     public void addCoffee(double addCoffee, Coffee coffee) {
-        this.coffee = coffee;
+        if (this.coffee == null || !this.coffee.equals(coffee)) {
+            this.coffee = coffee;
+            currentCoffee = 0;
+        }
+        checkAmountCoffee(addCoffee);
+    }
+
+    private void checkAmountCoffee(double addCoffee){
         double differenceCoffee = maxCoffee - currentCoffee;
         if (addCoffee > differenceCoffee) {
             System.out.printf("Вы пытаетесь добавить слишком много кофе! Будет добавлено только %.1f г\n",
