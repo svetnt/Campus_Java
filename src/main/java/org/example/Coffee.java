@@ -15,6 +15,10 @@ public class Coffee {
         return name + " " + type.getCoffeeDescription();
     }
 
+    public Type getType() {
+        return type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
