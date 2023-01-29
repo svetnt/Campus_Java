@@ -8,9 +8,18 @@ public class CommandExecutor {
     Coffee java = new Coffee("Java", Type.GROUND);
     Coffee buchido = new Coffee("Buchido", Type.BEANS);
 
-    public void commandReader() {
-        String inputConsol = input.nextLine();
-        switch (inputConsol) {
+    public void start() {
+        String command = "";
+        do {
+            System.out.println("Введите команду.  Возможные команды:  Приготовить напиток, Добавить воды,  Добавить кофе,  Exit");
+            command = input.nextLine();
+            commandReader(command);
+        } while (!command.equals("Exit"));
+    }
+
+    public void commandReader(String command) {
+
+        switch (command) {
             case "Приготовить напиток":
                 makCoffeeCommand();
                 break;
@@ -48,7 +57,7 @@ public class CommandExecutor {
         }
 
         System.out.println("Введите объем чашки в мл (от 10 до 300) ");
-        int inputSize = input.nextInt();
+        int inputSize = Integer.parseInt(input.nextLine());
         if (inputSize >= 10 && inputSize <= 300) {
             inputInfo.sizeCup = inputSize;
         } else {
@@ -57,11 +66,11 @@ public class CommandExecutor {
         }
 
         System.out.println("Выберите желаемый тип кофе. Введите 1 - для выбора кофе в зернах,  2 - для выбора молотого кофе");
-        switch (input.nextInt()) {
-            case 1:
+        switch (input.nextLine()) {
+            case "1":
                 inputInfo.type = Type.BEANS;
                 break;
-            case 2:
+            case "2":
                 inputInfo.type = Type.GROUND;
                 break;
             default:
@@ -74,18 +83,19 @@ public class CommandExecutor {
 
     public void addWaterCommand() {
         System.out.println("Какой объем воды хотите добавить?");
-        coffeeMachine.addWater(input.nextInt());
+        String water = input.nextLine();
+        coffeeMachine.addWater(Integer.parseInt(water));
     }
 
     public void addCoffeeCommand() {
         InputInfo addCoffeInfo = new InputInfo();
         System.out.printf("Выберите тип добавляемого кофе. Для добавления %s введите 1,  для добавления %s введите 2\n",
                 java.getCoffeeName(), buchido.getCoffeeName());
-        switch (input.nextInt()) {
-            case 1:
+        switch (input.nextLine()) {
+            case "1":
                 addCoffeInfo.coffee = java;
                 break;
-            case 2:
+            case "2":
                 addCoffeInfo.coffee = buchido;
                 break;
             default:
@@ -93,6 +103,6 @@ public class CommandExecutor {
                 System.exit(1);
         }
         System.out.println("Сколько кофе хотите добавить?");
-        addCoffeInfo.addCoffee = input.nextDouble();
+        addCoffeInfo.addCoffee = Double.parseDouble(input.nextLine());
     }
 }
